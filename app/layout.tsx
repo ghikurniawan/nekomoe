@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import Providers from "./providers";
 import React from "react";
 import NextTopLoader from "nextjs-toploader";
+import Logo from "@/components/Logo";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,9 +58,16 @@ export default function RootLayout({
           {children}
           <footer className="h-[10vh] p-1">
             <div className="flex justify-between w-full">
-              <div>Footer</div>
-              <div>Footer</div>
-              <div>Footer</div>
+              <div></div>
+              <Link href={"/"}>
+                <div className="flex flex-col items-center justify-center">
+                  <Logo className="w-10 h-10" />
+                  <div className="font-bold text-xl text-foreground/50">
+                    Neko<span className="text-green-400">moe</span>
+                  </div>
+                </div>
+              </Link>
+              <div></div>
             </div>
           </footer>
         </Providers>

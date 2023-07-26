@@ -1,8 +1,10 @@
 import SectionComponent from "@/components/Section";
 import Sponsors from "@/components/Sponsors";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getBaseUrl } from "@/lib/getBaseUrl";
+import { getFinishedAnime } from "@/lib/getFinishedAnime";
+import { getOngoingAnime } from "@/lib/getOngoingAnime";
 import { PlayIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,7 +18,7 @@ export default async function Home() {
           <AspectRatio ratio={21 / 9}>
             <Suspense
               fallback={
-                <div className="w-full h-full shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+                <div className="w-full h-full before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
               }
             >
               <Sponsors />
@@ -33,30 +35,36 @@ export default async function Home() {
             Show all
           </Link>
         </div>
-        <Suspense fallback={"loading"}>
+
+        <Suspense fallback={<GridFallback />}>
           <OnGoing />
         </Suspense>
 
         <div className="flex justify-between">
-          <h3 className="font-semibold ">Popular</h3>
+          <h3 className="font-semibold ">Finished</h3>
           <Link
-            href={"/"}
+            href={"/finished"}
             className="text-muted-foreground hover:text-foreground"
           >
             Show all
           </Link>
         </div>
+        <Suspense fallback={<GridFallback />}>
+          <Finished />
+        </Suspense>
       </div>
     </SectionComponent>
   );
 }
 
-const getOngoingAnime = async () => {
-  const populars = await fetch(`${getBaseUrl()}/api/ongoing`, {
-    headers: { "content-type": "aplication/json" },
-  });
-  const json = populars?.json();
-  return json;
+const GridFallback = () => {
+  return Array.from({ length: 18 }, (_, index) => index + 1).map((l) => (
+    <Card key={l} className="border rounded-md overflow-hidden">
+      <AspectRatio ratio={3 / 4}>
+        <div className="w-full h-full before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+      </AspectRatio>
+    </Card>
+  ));
 };
 
 type RecentType = {
@@ -119,6 +127,78 @@ const OnGoing = async () => {
             </AspectRatio>
           </Card>
         ))}
+      </div>
+      <div className="flex justify-center my-10">
+        <Link href={"/ongoing"}>
+          <span className={buttonVariants({ variant: "ghost" })}>
+            Lihat Semua
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+const Finished = async () => {
+  const finis = await getFinishedAnime();
+  if (finis?.message) {
+    return (
+      <div className="text-center">
+        <p>{finis.message}</p>
+      </div>
+    );
+  }
+  if (finis?.data.length === 0) {
+    return (
+      <div className="text-center">
+        <p>Anime tidak ditemukan</p>
+      </div>
+    );
+  }
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+        {finis?.data.map((d: RecentType) => (
+          <Card
+            key={d.animeId}
+            className="group border rounded-md overflow-hidden"
+          >
+            <AspectRatio ratio={3 / 4} className="bg-muted relative">
+              <Link
+                href={`/watch${d.animeId}`}
+                className="absolute inset-0 w-full group-focus:outline"
+              >
+                <Image
+                  src={d.image}
+                  alt={d.title}
+                  height={640}
+                  width={480}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute flex justify-center items-center bottom-0 left-0 right-0 h-2/4 group-hover:h-full transition-all bg-gradient-to-t from-zinc-100 to-zinc-100/0 dark:from-zinc-900 dark:to-zinc-900/0">
+                  <div className="opacity-0 p-2 group-hover:opacity-100 rounded-full bg-green-600 hover:bg-green-700">
+                    <PlayIcon className="h-5 w-5" />
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-2">
+                  <h3 className="text-xs font-semibold">{d.title}</h3>
+                </div>
+                <div className="absolute top-0 left-0 right-0 p-2">
+                  <h3 className="text-xs bg-background rounded-full p-1 inline-block px-2">
+                    {d.episode}
+                  </h3>
+                </div>
+              </Link>
+            </AspectRatio>
+          </Card>
+        ))}
+      </div>
+      <div className="flex justify-center my-10">
+        <Link href={"/finished"}>
+          <span className={buttonVariants({ variant: "ghost" })}>
+            Lihat Semua
+          </span>
+        </Link>
       </div>
     </div>
   );

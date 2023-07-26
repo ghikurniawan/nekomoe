@@ -20,7 +20,6 @@ const SearchPage: FC<SearchPageProps> = ({ searchParams }) => {
       </div>
     );
   }
-  console.log(query);
   return (
     <div>
       <div className="w-full">
@@ -46,14 +45,14 @@ const SearchResult: FC<{ query: string }> = async ({ query }) => {
   const result = await getSearch(query);
   if (result?.message) {
     return (
-      <div className="text-center">
+      <div className="text-center w-full col-span-6">
         <p>{result.message}</p>
       </div>
     );
   }
   if (result?.data.length === 0) {
     return (
-      <div className="text-center">
+      <div className="text-center w-full col-span-6">
         <p>Hasil tidak ditemukan</p>
       </div>
     );

@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getOngoingAnime } from "@/lib/getOngoingAnime";
+import { getFinishedAnime } from "@/lib/getFinishedAnime";
 
 type RecentType = {
   title: string;
@@ -16,27 +16,27 @@ type RecentType = {
   episode: string;
 };
 
-interface OngoingProps {
+interface FinishedPageProps {
   searchParams: {
     page: string;
   };
 }
 
-const Ongoing: FC<OngoingProps> = async ({ searchParams }) => {
+const FinishedPage: FC<FinishedPageProps> = async ({ searchParams }) => {
   const { page = 1 } = searchParams;
   return (
     <SectionComponent>
       <div className="w-full space-y-6 mb-10">
-        <h1 className="font-bold text-2xl">On Going</h1>
+        <h1 className="font-bold text-2xl">Finished</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
           <Suspense fallback={<GridFallback />}>
-            <ExoticOngoing page={page} />
+            <ExoticFinished page={page} />
           </Suspense>
         </div>
         <div className="mx-auto w-full flex gap-2 justify-center">
           {[1, 2, 3, 4, 5, 6, 7].map((item) => (
             <Link
-              href={`/ongoing?page=${item}`}
+              href={`/finished?page=${item}`}
               key={item}
               className={`${
                 item.toString() === page
@@ -60,11 +60,11 @@ const Ongoing: FC<OngoingProps> = async ({ searchParams }) => {
   );
 };
 
-export default Ongoing;
+export default FinishedPage;
 
-const ExoticOngoing: FC<{ page: string | number }> = async ({ page }) => {
-  const onGoing = await getOngoingAnime(page);
-  return onGoing?.data.map((d: RecentType) => (
+const ExoticFinished: FC<{ page: string | number }> = async ({ page }) => {
+  const finished = await getFinishedAnime(page);
+  return finished?.data.map((d: RecentType) => (
     <Card key={d.animeId} className="group border rounded-md overflow-hidden">
       <AspectRatio ratio={3 / 4} className="bg-muted relative">
         <Link

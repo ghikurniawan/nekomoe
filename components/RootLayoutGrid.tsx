@@ -43,10 +43,23 @@ function RootLayoutGrid({ children }: { children: React.ReactNode }) {
       <MainNav />
       <main className="h-[90vh] min-w-fit md:p-1">{children}</main>
       <aside className="z-10 p-1 flex flex-col gap-y-2 bg-background hover:border-l border-zinc-700">
-        <div className="bg-zinc-100 dark:bg-zinc-900 h-full rounded-md overflow-hidden p-4 ">
-          <div className=" max-h-80 rounded-md overflow-hidden h-full w-full mx-auto max-w-sm">
-            <AspectRatio ratio={3 / 4}>
+        <div className="bg-zinc-100 space-y-4 dark:bg-zinc-900 h-full rounded-md overflow-hidden p-4 ">
+          <div className="max-h-80 rounded-md overflow-hidden h-full w-full mx-auto max-w-sm">
+            <AspectRatio ratio={3 / 4} className="relative">
               <div className="w-full h-full shadow-sm shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+              <div className="absolute text-xs top-2 right-2 border py-1 px-4 rounded-full bg-background/50">
+                Sponsors
+              </div>
+            </AspectRatio>
+          </div>
+        </div>
+        <div className="bg-zinc-100 space-y-4 dark:bg-zinc-900 h-full rounded-md overflow-hidden p-4 ">
+          <div className="max-h-80 rounded-md overflow-hidden h-full w-full mx-auto max-w-sm">
+            <AspectRatio ratio={3 / 4} className="relative">
+              <div className="w-full h-full shadow-sm shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+              <div className="absolute text-xs top-2 right-2 border py-1 px-4 rounded-full bg-background/50">
+                Queue
+              </div>
             </AspectRatio>
           </div>
         </div>
