@@ -39,10 +39,10 @@ export const metadata: Metadata = {
     title: "Nekomoe",
     card: "summary_large_image",
   },
-  // verification: {
-  //   google: "eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw",
-  //   yandex: "14d2e73487fa6c71",
-  // },
+  verification: {
+    google: "x0qH6E4QomFPwyf8r-wvuOONVcduHkVTOA1yuOXxFcA",
+    yandex: "",
+  },
 };
 
 export default function RootLayout({
