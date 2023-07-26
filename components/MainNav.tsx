@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   HomeIcon,
+  LightningBoltIcon,
   MagnifyingGlassIcon,
   MixIcon,
   RocketIcon,
@@ -8,7 +9,7 @@ import {
 
 const MainNav = () => {
   return (
-    <aside className="z-10 p-1 flex flex-col gap-y-2 hover:border-r border-zinc-700">
+    <aside className="z-10 p-1 flex flex-col gap-y-2 lg:hover:border-r border-zinc-700 h-full">
       <div className="bg-zinc-100 font-semibold dark:bg-zinc-900 rounded-md h-fit w-full p-4 space-y-4">
         <Link
           href={"/"}
@@ -32,6 +33,13 @@ const MainNav = () => {
         >
           <RocketIcon className="h-5 w-5 mr-4 " />
           <span className="text-xl">On Going</span>
+        </Link>
+        <Link
+          href={"/finished"}
+          className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+        >
+          <LightningBoltIcon className="h-5 w-5 mr-4 " />
+          <span className="text-xl">Finished</span>
         </Link>
         <Link
           href={"/properties"}

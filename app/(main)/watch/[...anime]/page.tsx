@@ -1,7 +1,10 @@
 import Player from "@/components/Player";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getBaseUrl } from "@/lib/getBaseUrl";
+import { DoubleArrowRightIcon, PlayIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import { Key, Suspense } from "react";
 
 const getWatchAnime = async (animeId: string, episode = "episode/1") => {
@@ -42,7 +45,6 @@ export default async function WatchPage({
     );
   }
   const { episodeUrl, data } = watch;
-
   return (
     <div className="space-y-4 py-4 mb-10">
       <div className=" max-h-[80vh] rounded-md overflow-hidden h-full w-full mx-auto">
@@ -66,12 +68,23 @@ export default async function WatchPage({
       <ScrollArea
         type="hover"
         scrollHideDelay={600}
-        className="w-full max-w-xs h-[20vh] p-4 border rounded-lg"
+        className="w-full md:w-1/2 h-[40vh] lg:h-[20vh] border rounded-lg"
       >
         {data?.map(
-          (item: { episodeText: string }, i: Key | null | undefined) => (
-            <div key={i} className="w-full p-2 border bg-background">
-              {item.episodeText}
+          (
+            item: { episodeText: string; episodeId: string },
+            i: Key | null | undefined
+          ) => (
+            <div
+              key={i}
+              className="w-full px-4 py-1 group border flex justify-between items-center"
+            >
+              <p className="py-3">{item.episodeText || "Next Page"}</p>
+              <Link href={`/watch${item?.episodeId}`} prefetch={false}>
+                <Button size={"icon"} className="md:hidden group-hover:flex">
+                  {item.episodeText ? <PlayIcon /> : <DoubleArrowRightIcon />}
+                </Button>
+              </Link>
             </div>
           )
         )}

@@ -7,6 +7,8 @@ import {
   CaretLeftIcon,
   CaretRightIcon,
   DesktopIcon,
+  GitHubLogoIcon,
+  HamburgerMenuIcon,
   MoonIcon,
   SunIcon,
 } from "@radix-ui/react-icons";
@@ -15,12 +17,16 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useMachine } from "@xstate/react";
 import { ToggleModeMachine } from "@/lib/state-machine/ToggleModeMachine";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import MainNav from "./MainNav";
+import useWindowSize from "@/lib/hooks/use-window-size";
 
 const Topbar = () => {
   const [current, send] = useMachine(ToggleModeMachine);
   const { setTheme, theme } = useTheme();
   const scrolled = useScroll(20);
   const router = useRouter();
+  const { isMobile } = useWindowSize();
 
   useEffect(() => {
     send(theme as "light" | "dark" | "system");
@@ -44,7 +50,21 @@ const Topbar = () => {
       )}
     >
       <div className="flex justify-between">
-        <div className="space-x-4">
+        <div className="space-x-4 flex">
+          {isMobile && (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant={"ghost"}
+                  size={"icon"}
+                  className={cn("bg-background/50")}
+                >
+                  <HamburgerMenuIcon />
+                </Button>
+              </SheetTrigger>
+              <SheetLeft />
+            </Sheet>
+          )}
           <Button
             variant={"ghost"}
             size={"icon"}
@@ -68,7 +88,8 @@ const Topbar = () => {
             size={"sm"}
             className={cn("rounded-full")}
           >
-            Explore Premium
+            <GitHubLogoIcon className="mr-2" />
+            Contribution
           </Button>
           {current.value !== "system" && (
             <Button
@@ -101,3 +122,11 @@ const Topbar = () => {
 };
 
 export default Topbar;
+
+const SheetLeft = () => {
+  return (
+    <SheetContent side={"left"} className="w-[400px] sm:w-[300px] p-2">
+      <MainNav />
+    </SheetContent>
+  );
+};
