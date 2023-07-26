@@ -1,4 +1,5 @@
 import SectionComponent from "@/components/Section";
+import Sponsors from "@/components/Sponsors";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card } from "@/components/ui/card";
 import { getBaseUrl } from "@/lib/getBaseUrl";
@@ -13,7 +14,13 @@ export default async function Home() {
       <div className="space-y-4 py-4 mb-4">
         <div className="max-h-[50vh] rounded-md overflow-hidden h-full w-full mx-auto">
           <AspectRatio ratio={21 / 9}>
-            <div className="w-full h-full shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+            <Suspense
+              fallback={
+                <div className="w-full h-full shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+              }
+            >
+              <Sponsors />
+            </Suspense>
           </AspectRatio>
         </div>
 

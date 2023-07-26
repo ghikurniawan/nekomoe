@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 const cheerio = require('cheerio')
-const baseURL = "https://kuramanime.xyz"
+import siteConfig from "@/lib/siteContif";
+const baseURL = siteConfig.scraptUrl
 
 export const runtime = "edge";
 
