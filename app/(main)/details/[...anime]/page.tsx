@@ -30,7 +30,7 @@ export default async function AnimePage({
     );
   }
   if (detailAnime?.data.length === 0) {
-    redirect(`/watch/${animeId}`);
+    redirect(`/watch/${animeId}/episode/1`);
     return (
       <div className="text-center">
         <p>Anime tidak ditemukan</p>
