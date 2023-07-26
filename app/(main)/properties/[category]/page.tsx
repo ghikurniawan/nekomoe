@@ -3,15 +3,7 @@ import { getBaseUrl } from "@/lib/getBaseUrl";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import {
-  Key,
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  PromiseLikeOfReactNode,
-  ReactPortal,
-  FC,
-} from "react";
+import { Key, FC } from "react";
 
 interface GenrePageProps {
   params: { category: string };
@@ -36,20 +28,11 @@ const GenrePage: FC<GenrePageProps> = async ({ params }) => {
       <h1 className="capitalize">{category}</h1>
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {allCategory?.data.map(
-          (item: {
-            genreId: Key | null | undefined;
-            genreName:
-              | string
-              | number
-              | boolean
-              | ReactElement<any, string | JSXElementConstructor<any>>
-              | Iterable<ReactNode>
-              | ReactPortal
-              | PromiseLikeOfReactNode
-              | null
-              | undefined;
-          }) => (
-            <li key={item.genreId}>
+          (
+            item: { genreId: Key | null | undefined; genreName: string },
+            index: Key | null | undefined
+          ) => (
+            <li key={index}>
               <Link href={`/properties/${category}/${item.genreId}`}>
                 <span
                   className={cn(

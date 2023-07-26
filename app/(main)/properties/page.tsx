@@ -13,7 +13,7 @@ import {
 
 const getAllProperties = async () => {
   const properties = await fetch(`${getBaseUrl()}/api/properties`);
-  const json = await properties.json();
+  const json = await properties?.json();
   return json;
 };
 
