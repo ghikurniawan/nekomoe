@@ -178,8 +178,6 @@ export async function GET(req: Request, { params }: { params: { anime: string[] 
       })
     );
 
-    datas.pop()
-
     return NextResponse.json({
       status: "success",
       statusCode: 200,
