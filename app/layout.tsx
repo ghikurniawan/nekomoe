@@ -6,7 +6,7 @@ import React from "react";
 import NextTopLoader from "nextjs-toploader";
 import Logo from "@/components/Logo";
 import Link from "next/link";
-
+import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -71,6 +71,7 @@ export default function RootLayout({
             </div>
           </footer>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
