@@ -10,13 +10,13 @@ import { Key, Suspense } from "react";
 const getWatchAnime = async (
   animeId: string,
   episode?: string,
-  params?: string
+  stream_server: string = "archive"
 ) => {
   const populars = await fetch(
-    `${getBaseUrl()}/api/watch/${animeId}/${episode}?stream_server=${params}`,
+    `${getBaseUrl()}/api/watch/${animeId}/${episode}?stream_server=${stream_server}`,
     {
       headers: { "content-type": "aplication/json" },
-      cache: "no-store",
+      next: { revalidate: 60 },
     }
   );
   const json = populars.json();
@@ -36,6 +36,7 @@ export default async function WatchPage({
   if (episode == "undefined/undefined") {
     episode = undefined;
   }
+  console.log(stream_server);
   const watch = await getWatchAnime(animeId, episode, stream_server);
   if (watch?.message) {
     return (
