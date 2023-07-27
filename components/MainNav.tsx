@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  BarChartIcon,
   HomeIcon,
   LightningBoltIcon,
   MagnifyingGlassIcon,
@@ -26,28 +27,39 @@ const MainNav = () => {
           <span className="text-xl">Search</span>
         </Link>
       </div>
-      <div className="bg-zinc-100 font-semibold dark:bg-zinc-900 rounded-md h-full p-4 space-y-4">
-        <Link
-          href={"/ongoing"}
-          className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
-        >
-          <RocketIcon className="h-5 w-5 mr-4 " />
-          <span className="text-xl">On Going</span>
-        </Link>
-        <Link
-          href={"/finished"}
-          className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
-        >
-          <LightningBoltIcon className="h-5 w-5 mr-4 " />
-          <span className="text-xl">Finished</span>
-        </Link>
-        <Link
-          href={"/properties"}
-          className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
-        >
-          <MixIcon className="h-5 w-5 mr-4 " />
-          <span className="text-xl">Properties</span>
-        </Link>
+      <div className="bg-zinc-100 font-semibold dark:bg-zinc-900 rounded-md h-full p-4 flex flex-col justify-between">
+        <div className="space-y-4">
+          <Link
+            href={"/ongoing"}
+            className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+          >
+            <RocketIcon className="h-5 w-5 mr-4 " />
+            <span className="text-xl">On Going</span>
+          </Link>
+          <Link
+            href={"/finished"}
+            className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+          >
+            <LightningBoltIcon className="h-5 w-5 mr-4 " />
+            <span className="text-xl">Finished</span>
+          </Link>
+          <Link
+            href={"/properties"}
+            className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+          >
+            <MixIcon className="h-5 w-5 mr-4 " />
+            <span className="text-xl">Properties</span>
+          </Link>
+        </div>
+        <div>
+          <Link
+            href={"/analytics"}
+            className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+          >
+            <BarChartIcon className="h-5 w-5 mr-4" />
+            <span className="text-xl">Analytics</span>
+          </Link>
+        </div>
       </div>
     </aside>
   );
