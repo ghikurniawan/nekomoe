@@ -100,7 +100,7 @@ const OnGoing = async () => {
           >
             <AspectRatio ratio={3 / 4} className="bg-muted relative">
               <Link
-                href={`/watch${d.animeId}`}
+                href={`/details${d.animeId}`}
                 className="absolute inset-0 w-full group-focus:outline"
               >
                 <Image
@@ -165,7 +165,7 @@ const Finished = async () => {
           >
             <AspectRatio ratio={3 / 4} className="bg-muted relative">
               <Link
-                href={`/watch${d.animeId}`}
+                href={`/details${d.animeId}`}
                 className="absolute inset-0 w-full group-focus:outline"
               >
                 <Image
