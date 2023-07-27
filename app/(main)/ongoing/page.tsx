@@ -68,7 +68,7 @@ const ExoticOngoing: FC<{ page: string | number }> = async ({ page }) => {
     <Card key={d.animeId} className="group border rounded-md overflow-hidden">
       <AspectRatio ratio={3 / 4} className="bg-muted relative">
         <Link
-          href={`/watch${d.animeId}`}
+          href={`/details${d.animeId}`}
           className="absolute inset-0 w-full group-focus:outline"
         >
           <Image

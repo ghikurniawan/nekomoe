@@ -36,7 +36,7 @@ export default async function WatchPage({
   if (episode == "undefined/undefined") {
     episode = undefined;
   }
-  console.log(stream_server);
+
   const watch = await getWatchAnime(animeId, episode, stream_server);
   if (watch?.message) {
     return (
@@ -48,7 +48,7 @@ export default async function WatchPage({
   if (watch?.data.length === 0) {
     return (
       <div className="text-center">
-        <p>Anime Tidak Ditemukan {`${getBaseUrl()}/${animeId}`}</p>
+        <p>Anime Tidak Ditemukan {`${getBaseUrl()}/watch/${animeId}`}</p>
       </div>
     );
   }

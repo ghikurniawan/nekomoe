@@ -53,7 +53,13 @@ const Player: FC<{
   function handlePipStart(): void {
     window?.open("/", "_blank");
   }
-
+  if (source.length === 0) {
+    return (
+      <div>
+        <p>Source tida ditemukan di server ini, coba server lain</p>
+      </div>
+    );
+  }
   return (
     <div className="relative w-full h-full">
       {isClient && (
