@@ -10,10 +10,11 @@ import { Key, Suspense } from "react";
 const getWatchAnime = async (
   animeId: string,
   episode?: string,
-  stream_server: string = "archive"
+  stream_server: string = "archive",
+  page: string | number = 1
 ) => {
   const populars = await fetch(
-    `${getBaseUrl()}/api/watch/${animeId}/${episode}?stream_server=${stream_server}`,
+    `${getBaseUrl()}/api/watch/${animeId}/${episode}?stream_server=${stream_server}&page=${page}`,
     {
       headers: { "content-type": "aplication/json" },
       next: { revalidate: 60 },
@@ -28,16 +29,16 @@ export default async function WatchPage({
   searchParams,
 }: {
   params: { anime: string[] };
-  searchParams: { stream_server: string };
+  searchParams: { stream_server: string; page: string | number };
 }) {
   const animeId = `${params.anime[0]}/${params.anime[1]}/${params.anime[2]}`;
-  const { stream_server } = searchParams;
+  const { stream_server, page } = searchParams;
   let episode = `${params.anime[3]}/${params.anime[4]}` as string | undefined;
   if (episode == "undefined/undefined") {
     episode = undefined;
   }
 
-  const watch = await getWatchAnime(animeId, episode, stream_server);
+  const watch = await getWatchAnime(animeId, episode, stream_server, page);
   if (watch?.message) {
     return (
       <div>
@@ -88,7 +89,10 @@ export default async function WatchPage({
               className="w-full px-4 py-1 group border flex justify-between items-center"
             >
               <p className="py-3">{item.episodeText || "Next Page"}</p>
-              <Link href={`/watch${item?.episodeId}`} prefetch={false}>
+              <Link
+                href={`/watch${item?.episodeId}?stream_server=${stream_server}&page=${page}`}
+                prefetch={false}
+              >
                 <Button size={"icon"} className="md:hidden group-hover:flex">
                   {item.episodeText ? <PlayIcon /> : <DoubleArrowRightIcon />}
                 </Button>

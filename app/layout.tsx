@@ -8,11 +8,12 @@ import Logo from "@/components/Logo";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import { getBaseUrl } from "@/lib/getBaseUrl";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.BASE_URL || "http://localhost:3000"),
+  metadataBase: new URL(getBaseUrl()),
   title: {
     default: "Nekomoe",
     template: "%s | Nekomoe",

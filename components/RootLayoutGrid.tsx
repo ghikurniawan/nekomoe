@@ -14,7 +14,7 @@ import MainNav from "./MainNav";
 
 function RootLayoutGrid({ children }: { children: React.ReactNode }) {
   const { isDesktop } = useWindowSize();
-  const [leftSize, setLeftSize] = useState(250);
+  const [leftSize, setLeftSize] = useState(300);
   const [rightSize, setRightSize] = useState(300);
   const getGridState = (gridState: GridState) => {
     if (isHorizontalGrid(gridState)) {

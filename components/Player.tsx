@@ -10,17 +10,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ToastAction } from "@/components/ui/toast";
+// import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useLocalStorage from "@/lib/hooks/use-local-storage";
+
+const DEFAULT_PLAY_VALUE = {
+  stream_server: "archive",
+};
 
 const Player: FC<{
   source: { episode: string; type: string; size: string | number }[];
   className?: string;
 }> = ({ source, className }) => {
+  const [defaultPlayValue, setDefaultPlayValue] = useLocalStorage(
+    "playstorage",
+    DEFAULT_PLAY_VALUE
+  );
   const [isClient, setIsClient] = useState(false);
   const [defaultSource, setDefaultSource] = useState(0);
   const [url, setUrl] = useState("");
   const [muted, setMuted] = useState(false);
+  const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -43,8 +57,8 @@ const Player: FC<{
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        description: "Vidio tidak ditemukan di server ini.",
+        // action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }
     console.log(error, hlsGlobal, hlsInstance, data);
@@ -53,6 +67,12 @@ const Player: FC<{
   function handlePipStart(): void {
     window?.open("/", "_blank");
   }
+
+  const handleServerChange = (value: string): void => {
+    setDefaultPlayValue({ ...defaultPlayValue, stream_server: value });
+    router.push(`${pathName}?stream_server=${value}&page=${page ? page : ""}`);
+  };
+
   if (source.length === 0) {
     return (
       <div>
@@ -60,6 +80,25 @@ const Player: FC<{
       </div>
     );
   }
+  const server = [
+    {
+      title: "Server 1",
+      value: "archive",
+    },
+    {
+      title: "Server 2",
+      value: "archive-v2",
+    },
+    {
+      title: "Server 3",
+      value: "kuramadrive",
+    },
+    {
+      title: "Server 4",
+      value: "kuramadrive-v2",
+    },
+  ];
+
   return (
     <div className="relative w-full h-full">
       {isClient && (
@@ -95,6 +134,24 @@ const Player: FC<{
                 className="text-accent-foreground"
               >
                 {s.size}p
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="absolute top-2 right-2">
+        <Select onValueChange={handleServerChange}>
+          <SelectTrigger className="w-[100px] border-none bg-background/5">
+            <SelectValue placeholder="Server" />
+          </SelectTrigger>
+          <SelectContent>
+            {server.map((server) => (
+              <SelectItem
+                key={server.title}
+                value={server.value}
+                className="text-accent-foreground"
+              >
+                {server.title}
               </SelectItem>
             ))}
           </SelectContent>

@@ -10,8 +10,9 @@ export async function GET(req: Request, { params }: { params: { anime: string[] 
   const url = new URL(req.url)
   const activate_stream = url.searchParams.get('activate_stream')
   const stream_server = url.searchParams.get('stream_server')
+  const page = url.searchParams.get('page')
   try {
-    const rawResponse = await fetch(`${baseURL}/${animeId}?activate_stream=${activate_stream || 1}&stream_server=${stream_server || "archive"}`, {
+    const rawResponse = await fetch(`${baseURL}/${animeId}?activate_stream=${activate_stream || 1}&stream_server=${stream_server || "archive"}&page=${page || 1}`, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
