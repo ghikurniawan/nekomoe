@@ -7,9 +7,13 @@ import { DoubleArrowRightIcon, PlayIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Key, Suspense } from "react";
 
-const getWatchAnime = async (animeId: string, episode = "episode/1") => {
+const getWatchAnime = async (
+  animeId: string,
+  episode?: string,
+  params?: string
+) => {
   const populars = await fetch(
-    `${getBaseUrl()}/api/watch/${animeId}/${episode}`,
+    `${getBaseUrl()}/api/watch/${animeId}/${episode}?stream_server=${params}`,
     {
       headers: { "content-type": "aplication/json" },
       cache: "no-store",
@@ -21,15 +25,18 @@ const getWatchAnime = async (animeId: string, episode = "episode/1") => {
 
 export default async function WatchPage({
   params,
+  searchParams,
 }: {
   params: { anime: string[] };
+  searchParams: { stream_server: string };
 }) {
   const animeId = `${params.anime[0]}/${params.anime[1]}/${params.anime[2]}`;
+  const { stream_server } = searchParams;
   let episode = `${params.anime[3]}/${params.anime[4]}` as string | undefined;
   if (episode == "undefined/undefined") {
     episode = undefined;
   }
-  const watch = await getWatchAnime(animeId, episode);
+  const watch = await getWatchAnime(animeId, episode, stream_server);
   if (watch?.message) {
     return (
       <div>

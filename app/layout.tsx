@@ -12,7 +12,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.BASE_URL as string),
+  metadataBase: new URL(process.env.BASE_URL || "http://localhost:3000"),
   title: {
     default: "Nekomoe",
     template: "%s | Nekomoe",
