@@ -7,6 +7,8 @@ import NextTopLoader from "nextjs-toploader";
 import Logo from "@/components/Logo";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -72,6 +74,11 @@ export default function RootLayout({
           </footer>
         </Providers>
         <Analytics />
+        <Script
+          async
+          src="https://iwwwan-umami.vercel.app/script.js"
+          data-website-id="5af5b555-c821-4ec0-876c-1a5e0174df18"
+        ></Script>
       </body>
     </html>
   );
