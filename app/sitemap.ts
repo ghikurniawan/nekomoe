@@ -13,7 +13,7 @@ export default async function sitemap() {
     await Promise.all(
       [1, 2, 3, 4, 5, 6, 7].map(async (p) => {
         const a = await getOngoingAnime(p);
-        a?.data.map((d: { animeId: string }) => {
+        a?.data?.map((d: { animeId: string }) => {
           o.push({
             url: new URL(process.env.BASE_URL + "/watch" + d.animeId).href,
             lastModified: new Date().toISOString().split("T")[0],
@@ -26,7 +26,7 @@ export default async function sitemap() {
 
   const watchs = await fetchData();
 
-  const routes = ['', '/ongoing', '/properties'].map(
+  const routes = ['', '/ongoing', '/properties', '/finished'].map(
     (route) => ({
       url: process.env.BASE_URL + route,
       lastModified: new Date().toISOString().split('T')[0],
