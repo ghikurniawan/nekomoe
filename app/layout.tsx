@@ -2,13 +2,15 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
-import React from "react";
+import React, { Suspense } from "react";
 import NextTopLoader from "nextjs-toploader";
 import Logo from "@/components/Logo";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import { getBaseUrl } from "@/lib/getBaseUrl";
+import { Button } from "@/components/ui/button";
+import { EyeOpenIcon } from "@radix-ui/react-icons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,6 +50,8 @@ export const metadata: Metadata = {
   },
 };
 
+const UMAMI_TOKEN = process.env.UMAMI_TOKEN;
+
 export default function RootLayout({
   children,
 }: {
@@ -60,7 +64,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <footer className="h-[10vh] p-1">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full items-center px-4">
               <div></div>
               <Link href={"/"}>
                 <div className="flex flex-col items-center justify-center">
@@ -70,7 +74,17 @@ export default function RootLayout({
                   </div>
                 </div>
               </Link>
-              <div></div>
+              <div>
+                {UMAMI_TOKEN && (
+                  <Link href={"/analytics"}>
+                    <Button variant={"outline"} className="rounded-full">
+                      <Suspense fallback={"Loading..."}>
+                        <ActiveViews />
+                      </Suspense>
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </div>
           </footer>
         </Providers>
@@ -84,3 +98,23 @@ export default function RootLayout({
     </html>
   );
 }
+
+const ActiveViews = async () => {
+  const response = await fetch(
+    "https://iwwwan-umami.vercel.app/api/websites/5af5b555-c821-4ec0-876c-1a5e0174df18/active",
+    {
+      headers: {
+        Authorization: `Bearer ${UMAMI_TOKEN}`,
+      },
+      next: { revalidate: 60 },
+    }
+  );
+
+  const active: { x: string }[] = await response.json();
+
+  return (
+    <>
+      {active?.map((n) => n.x)} <EyeOpenIcon className="ml-2" />
+    </>
+  );
+};
