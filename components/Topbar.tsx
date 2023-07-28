@@ -125,7 +125,7 @@ export default Topbar;
 
 const SheetLeft = () => {
   return (
-    <SheetContent side={"left"} className="w-[300px] sm:w-[300px] p-2">
+    <SheetContent side={"left"} className="w-[300px] p-2">
       <MainNav />
     </SheetContent>
   );

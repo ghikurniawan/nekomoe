@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <NextTopLoader color="#ff0080" showSpinner={false} />
+        <NextTopLoader color="#4ade80" showSpinner={false} />
         <Providers>
           {children}
           <footer className="h-[10vh] p-1">

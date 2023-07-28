@@ -14,16 +14,16 @@ import MainNav from "./MainNav";
 
 function RootLayoutGrid({ children }: { children: React.ReactNode }) {
   const { isDesktop } = useWindowSize();
-  const [leftSize, setLeftSize] = useState(300);
-  const [rightSize, setRightSize] = useState(300);
+  const [leftSize, setLeftSize] = useState(250);
+  const [rightSize, setRightSize] = useState(250);
   const getGridState = (gridState: GridState) => {
     if (isHorizontalGrid(gridState)) {
       // Resizable Horizontal Grid
       // console.log(gridState.left.currentSize);
-      if (Number(gridState.left.currentSize) < 305) {
-        setLeftSize(150);
+      if (Number(gridState.left.currentSize) < 240) {
+        setLeftSize(100);
       } else {
-        setRightSize(300);
+        setRightSize(200);
       }
     } else {
       // Resizable Vertical Grid
@@ -34,7 +34,7 @@ function RootLayoutGrid({ children }: { children: React.ReactNode }) {
     <ResizableHorizontalGrid
       initialWidths={{ left: leftSize, right: rightSize }}
       getCurrentState={getGridState}
-      minWidth={leftSize}
+      minWidth={230}
       collapseLeft={!isDesktop}
       collapseRight={!isDesktop}
       gridId={5}
