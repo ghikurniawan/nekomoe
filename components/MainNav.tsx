@@ -1,14 +1,18 @@
 import Link from "next/link";
 import {
   BarChartIcon,
+  CalendarIcon,
   HomeIcon,
   LightningBoltIcon,
   MagnifyingGlassIcon,
   MixIcon,
   RocketIcon,
+  SunIcon,
 } from "@radix-ui/react-icons";
 
 const MainNav = () => {
+  const date = new Date();
+  const year = date.getFullYear();
   return (
     <aside className="z-10 p-1 flex flex-col gap-y-2 lg:hover:border-r border-zinc-700 h-full">
       <div className="bg-zinc-100 font-semibold dark:bg-zinc-900 rounded-md h-fit w-full p-4 space-y-4">
@@ -42,6 +46,20 @@ const MainNav = () => {
           >
             <LightningBoltIcon className="h-5 w-5 mr-4 " />
             <span className="text-xl">Finished</span>
+          </Link>
+          <Link
+            href={`/properties/season/summer-${year}?page=1`}
+            className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+          >
+            <SunIcon className="h-5 w-5 mr-4 " />
+            <span className="text-xl">Summer {year}</span>
+          </Link>
+          <Link
+            href={`/schedule`}
+            className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
+          >
+            <CalendarIcon className="h-5 w-5 mr-4 " />
+            <span className="text-xl">Schedule</span>
           </Link>
           <Link
             href={"/properties"}

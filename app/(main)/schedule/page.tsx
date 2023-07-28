@@ -6,7 +6,7 @@ interface SchedulePageProps {}
 const SchedulePage: FC<SchedulePageProps> = () => {
   return (
     <SectionComponent>
-      <p>schedule</p>
+      <p>schedule soon</p>
     </SectionComponent>
   );
 };

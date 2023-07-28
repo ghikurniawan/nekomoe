@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 const cheerio = require('cheerio')
-import siteConfig from "@/lib/siteContif";
+import siteConfig from "@/lib/siteConfig";
 const baseURL = siteConfig.scraptUrl
 
 export const runtime = "edge";
@@ -13,7 +13,8 @@ export async function GET(req: Request, { params }: { params: { anime: string[] 
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
         "Accept-Language": "en-US,en;q=0.9",
-      }
+      },
+      next: { revalidate: 60 * 60 }
     })
     const html = await rawResponse.text()
     const $ = cheerio.load(html);

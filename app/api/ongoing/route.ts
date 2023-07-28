@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 const cheerio = require('cheerio')
-import siteConfig from "@/lib/siteContif";
+import siteConfig from "@/lib/siteConfig";
 const baseURL = siteConfig.scraptUrl
 
 export const runtime = "edge";
@@ -10,7 +10,7 @@ export async function GET(req: Request) {
   const order_by = params.searchParams.get('order_by')
   const page = params.searchParams.get('page')
   try {
-    const rawResponse = await fetch(`${baseURL}/anime/ongoing?order_by=${order_by || "updated"}&page=${page || 1}`)
+    const rawResponse = await fetch(`${baseURL}/anime/ongoing?order_by=${order_by || "updated"}&page=${page || 1}`, { next: { revalidate: 60 * 60 } })
     const html = await rawResponse.text()
     const $ = cheerio.load(html);
     const element = $("#animeList > div > div");

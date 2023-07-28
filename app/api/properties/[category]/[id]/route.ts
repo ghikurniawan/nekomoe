@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 const cheerio = require('cheerio')
-import siteConfig from "@/lib/siteContif";
+import siteConfig from "@/lib/siteConfig";
 const baseURL = siteConfig.scraptUrl
 
 export const runtime = "edge";

@@ -6,10 +6,13 @@ import { PlayIcon } from "@radix-ui/react-icons";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { FC, Suspense } from "react";
+import { getDelay } from "@/lib/getDelay";
 
 const getDetailsAnime = async (animeId: string) => {
   const populars = await fetch(`${getBaseUrl()}/api/details/${animeId}`, {
     headers: { "content-type": "aplication/json" },
+    next: { revalidate: 60 },
   });
   const json = populars.json();
   return json;
@@ -43,14 +46,13 @@ export default async function AnimePage({
       <div className="space-y-4 py-4 mb-4">
         <div className="max-h-[80vh] rounded-md overflow-hidden h-full w-full mx-auto">
           <AspectRatio ratio={16 / 9}>
-            {/* <div className="w-full h-full shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div> */}
-            <Image
-              src={image}
-              alt={title}
-              width={1080}
-              height={720}
-              className="w-full h-full object-cover"
-            />
+            <Suspense
+              fallback={
+                <div className="w-full h-full shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
+              }
+            >
+              <ExoticBannerImage image={image} title={title} />
+            </Suspense>
           </AspectRatio>
         </div>
 
@@ -93,3 +95,21 @@ export default async function AnimePage({
     </SectionComponent>
   );
 }
+
+const ExoticBannerImage: FC<{ image: string; title: string }> = async ({
+  image,
+  title,
+}) => {
+  const delay = await getDelay(1500);
+  return (
+    delay && (
+      <Image
+        src={image}
+        alt={title}
+        width={1080}
+        height={720}
+        className="w-full h-full object-cover"
+      />
+    )
+  );
+};
