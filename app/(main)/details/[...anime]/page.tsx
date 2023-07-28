@@ -3,7 +3,6 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card } from "@/components/ui/card";
 import { getBaseUrl } from "@/lib/getBaseUrl";
 import { PlayIcon } from "@radix-ui/react-icons";
-import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, Suspense } from "react";
@@ -32,14 +31,7 @@ export default async function AnimePage({
       </div>
     );
   }
-  if (detailAnime?.data.length === 0) {
-    redirect(`/watch/${animeId}/episode/1`);
-    return (
-      <div className="text-center">
-        <p>Anime tidak ditemukan</p>
-      </div>
-    );
-  }
+
   const { episode, title, image } = detailAnime.data[0];
   return (
     <SectionComponent>
