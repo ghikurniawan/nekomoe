@@ -26,6 +26,24 @@ export default async function sitemap() {
 
   const watchs = await fetchData();
 
+  let f: any[] = [];
+  async function fetchFinished() {
+    await Promise.all(
+      [1, 2, 3, 4, 5, 6, 7].map(async (p) => {
+        const a = await getOngoingAnime(p);
+        a?.data?.map((d: { animeId: string }) => {
+          f.push({
+            url: new URL(process.env.BASE_URL + "/details" + d.animeId).href,
+            lastModified: new Date().toISOString().split("T")[0],
+          });
+        });
+      })
+    );
+    return f;
+  }
+
+  const finished = await fetchFinished();
+
   const routes = ['', '/ongoing', '/properties', '/finished'].map(
     (route) => ({
       url: process.env.BASE_URL + route,
@@ -33,5 +51,5 @@ export default async function sitemap() {
     })
   );
 
-  return [...routes, ...ongoing, ...watchs];
+  return [...routes, ...ongoing, ...watchs, ...finished];
 }

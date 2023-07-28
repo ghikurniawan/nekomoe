@@ -1,0 +1,14 @@
+{
+  "buildCommand": "next build",
+  "installCommand": "pnpm install",
+  "redirects": [
+    {
+      "source": "/analytics",
+      "destination": "https://iwwwan-umami.vercel.app/share/HylRhqOOfpd5PURO/nekomoe"
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/ghiwwwan/nekomoe"
+    }
+  ]
+}
