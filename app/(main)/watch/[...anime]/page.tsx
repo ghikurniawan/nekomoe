@@ -90,7 +90,9 @@ export default async function WatchPage({
             >
               <p className="py-3">{item.episodeText || "Next Page"}</p>
               <Link
-                href={`/watch${item?.episodeId}?stream_server=${stream_server}&page=${page}`}
+                href={`/watch${item?.episodeId}?${
+                  stream_server ? "stream_server=" + stream_server : ""
+                }${page ? "&page=" + page : ""}`}
                 prefetch={false}
               >
                 <Button size={"icon"} className="md:hidden group-hover:flex">
