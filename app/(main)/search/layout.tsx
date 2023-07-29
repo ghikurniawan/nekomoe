@@ -1,5 +1,4 @@
 import Search from "@/components/Search";
-import SectionComponent from "@/components/Section";
 import { FC, ReactNode } from "react";
 import { Metadata } from "next";
 
@@ -11,7 +10,7 @@ const LayoutSearch: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       <Search />
-      <SectionComponent>{children}</SectionComponent>
+      {children}
     </>
   );
 };

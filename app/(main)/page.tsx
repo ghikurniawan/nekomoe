@@ -1,4 +1,3 @@
-import SectionComponent from "@/components/Section";
 import Sponsors from "@/components/Sponsors";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { buttonVariants } from "@/components/ui/button";
@@ -12,18 +11,13 @@ import { Suspense } from "react";
 
 export default async function Home() {
   return (
-    <SectionComponent>
-      <div className="space-y-4 py-4 mb-4">
-        <div className="max-h-[50vh] rounded-md overflow-hidden h-full w-full mx-auto">
-          <AspectRatio ratio={21 / 9}>
-            <Suspense
-              fallback={
-                <div className="w-full h-full before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
-              }
-            >
-              <Sponsors />
-            </Suspense>
-          </AspectRatio>
+    <>
+      <div className="max-h-[35vh] absolute top-0 h-full w-full mx-auto">
+        <div className="w-full h-full bg-gradient-to-t from-zinc-100 via-zinc-100 to-zinc-200 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800"></div>
+      </div>
+      <div className="space-y-4 px-4">
+        <div className="h-[28vh]">
+          <Sponsors />
         </div>
 
         <div className="flex justify-between">
@@ -53,7 +47,7 @@ export default async function Home() {
           <Finished />
         </Suspense>
       </div>
-    </SectionComponent>
+    </>
   );
 }
 
@@ -96,7 +90,7 @@ const OnGoing = async () => {
         {onGoing?.data.map((d: RecentType) => (
           <Card
             key={d.animeId}
-            className="group border rounded-md overflow-hidden"
+            className="group border rounded-md overflow-hidden bg-transparent"
           >
             <AspectRatio ratio={3 / 4} className="bg-muted relative">
               <Link

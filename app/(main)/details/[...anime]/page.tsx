@@ -33,7 +33,7 @@ export default async function AnimePage({
 
   const { episode, title, image } = detailAnime.data[0];
   return (
-    <div className="space-y-4 py-4 mb-4">
+    <div className="space-y-4 py-4 mb-4 px-4 pb-10">
       <div className="max-h-[80vh] rounded-md overflow-hidden h-full w-full mx-auto">
         <AspectRatio ratio={16 / 9}>
           <Suspense

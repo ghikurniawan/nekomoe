@@ -33,7 +33,7 @@ const GenrePage: FC<GenrePageProps> = async ({ params, searchParams }) => {
     );
   }
   return (
-    <div className="w-full space-y-4 mb-20">
+    <div className="w-full space-y-4 px-4 mb-10">
       <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
         {allCategory?.data.map(
           (item: {

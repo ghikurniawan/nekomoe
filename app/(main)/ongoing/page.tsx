@@ -24,7 +24,7 @@ interface OngoingProps {
 const Ongoing: FC<OngoingProps> = async ({ searchParams }) => {
   const { page = 1 } = searchParams;
   return (
-    <div className="w-full space-y-6 mb-10">
+    <div className="w-full space-y-6 mb-10 px-4">
       <h1 className="font-bold text-2xl">On Going</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
         <Suspense fallback={<GridFallback />}>

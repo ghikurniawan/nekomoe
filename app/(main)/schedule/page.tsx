@@ -15,7 +15,7 @@ export default async function SchedulePage({
 }) {
   const { page } = searchParams;
   return (
-    <div className="pb-20 space-y-4 text-center">
+    <div className="pb-20 space-y-4 text-center px-4">
       <div className="mx-auto w-full flex gap-2 justify-center">
         {[1, 2, 3, 4, 5, 6, 7].map((item) => (
           <Link
@@ -51,7 +51,7 @@ export default async function SchedulePage({
 
 const GridFallback = () => {
   return Array.from({ length: 18 }, (_, index) => index + 1).map((l) => (
-    <Card key={l} className="border rounded-md overflow-hidden">
+    <Card key={l} className="border rounded-md overflow-hidden bg-transparent">
       <AspectRatio ratio={3 / 4}>
         <div className="w-full h-full before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
       </AspectRatio>

@@ -55,7 +55,7 @@ export default async function WatchPage({
   }
   const { episodeUrl, data } = watch;
   return (
-    <div className="space-y-4 py-4 mb-10">
+    <div className="space-y-4 py-4 mb-10 px-4">
       <div className=" max-h-[80vh] rounded-md overflow-hidden h-full w-full mx-auto">
         <AspectRatio ratio={16 / 9}>
           <Suspense

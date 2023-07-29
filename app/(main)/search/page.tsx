@@ -15,19 +15,17 @@ const SearchPage: FC<SearchPageProps> = ({ searchParams }) => {
   const { query } = searchParams;
   if (!query) {
     return (
-      <div className="text-center">
+      <div className="h-[70vh] flex items-center justify-center">
         <p>Ketikan kata dalam kotak pencarian</p>
       </div>
     );
   }
   return (
-    <div>
-      <div className="w-full">
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
-          <Suspense fallback={"Searching...."}>
-            <SearchResult query={query} />
-          </Suspense>
-        </div>
+    <div className="w-full bg-zinc-800 px-4 z-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+        <Suspense fallback={"Searching...."}>
+          <SearchResult query={query} />
+        </Suspense>
       </div>
     </div>
   );
