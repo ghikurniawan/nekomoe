@@ -59,7 +59,7 @@ export default async function Home() {
 
 const GridFallback = () => {
   return Array.from({ length: 18 }, (_, index) => index + 1).map((l) => (
-    <Card key={l} className="border rounded-md overflow-hidden">
+    <Card key={l} className="border rounded-md overflow-hidden bg-transparent">
       <AspectRatio ratio={3 / 4}>
         <div className="w-full h-full before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
       </AspectRatio>

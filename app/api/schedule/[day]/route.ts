@@ -5,17 +5,18 @@ const baseURL = siteConfig.scraptUrl
 
 export const runtime = "edge";
 
-export async function GET(req: Request) {
+export async function GET(req: Request, { params }: { params: { day: string } }) {
+  const scheduled_day = params.day
   const url = new URL(req.url)
   const page = url.searchParams.get('page')
   try {
-    const rawResponse = await fetch(`${baseURL}/schedule?page=${page || 1}`, {
+    const rawResponse = await fetch(`${baseURL}/schedule?scheduled_day=${scheduled_day || "all"}&page=${page || 1}`, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
         "Accept-Language": "en-US,en;q=0.9",
       },
-      next: { revalidate: 60 * 60 }
+      next: { revalidate: 60 }
     })
     const html = await rawResponse.text()
     const $ = cheerio.load(html);
@@ -60,7 +61,7 @@ export async function GET(req: Request) {
       status: "success",
       statusCode: 200,
       page: page || "1",
-      scheduled_day: "all",
+      scheduled_day: scheduled_day || "all",
       data: datas,
     })
   } catch (err) {

@@ -1,13 +1,13 @@
-import PropertiesNav from "@/components/PropertiesNav";
 import SectionComponent from "@/components/Section";
-import { Metadata } from "next";
 import React from "react";
+import { Metadata } from "next";
+import ScheduleNav from "@/components/ScheduleNav";
 
 export const metadata: Metadata = {
-  title: "Properties",
+  title: "Schedule",
 };
 
-export default function LayoutProperties({
+export default function ScheduleLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ export default function LayoutProperties({
   return (
     <>
       <div className="p-4">
-        <PropertiesNav />
+        <ScheduleNav />
       </div>
       <SectionComponent>{children}</SectionComponent>
     </>

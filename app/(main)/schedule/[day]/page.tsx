@@ -5,43 +5,19 @@ import { Card } from "@/components/ui/card";
 import { EyeOpenIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 
-export default async function SchedulePage({
-  searchParams,
+export default function ScheduledDaysPage({
+  params,
 }: {
-  searchParams: { page: string };
+  params: { day: string };
 }) {
-  const { page } = searchParams;
   return (
     <div className="pb-20 space-y-4 text-center">
-      <div className="mx-auto w-full flex gap-2 justify-center">
-        {[1, 2, 3, 4, 5, 6, 7].map((item) => (
-          <Link
-            href={`/schedule?page=${item}`}
-            key={item}
-            className={`${
-              item.toString() === page
-                ? "pointer-events-none cursor-default"
-                : ""
-            }`}
-          >
-            <span
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                item.toString() === page ? "bg-muted" : "bg-background"
-              )}
-            >
-              {item}
-            </span>
-          </Link>
-        ))}
-      </div>
       <div className="w-full space-y-6 mb-10">
+        <h1 className="font-bold text-2xl capitalize">{params?.day}</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <Suspense fallback={<GridFallback />}>
-            <ExoticSchedule page={page} />
+            <ExoticSchedule day={params.day} />
           </Suspense>
         </div>
       </div>
@@ -51,7 +27,7 @@ export default async function SchedulePage({
 
 const GridFallback = () => {
   return Array.from({ length: 18 }, (_, index) => index + 1).map((l) => (
-    <Card key={l} className="border rounded-md overflow-hidden">
+    <Card key={l} className="border rounded-md overflow-hidden bg-transparent">
       <AspectRatio ratio={3 / 4}>
         <div className="w-full h-full before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
       </AspectRatio>
@@ -59,19 +35,17 @@ const GridFallback = () => {
   ));
 };
 
-const getAllSchedule = async (page: string) => {
-  const properties = await fetch(
-    `${getBaseUrl()}/api/schedule${page ? "?page=" + page : ""}`,
-    {
-      next: { revalidate: 60 },
-    }
-  );
+const getAllSchedule = async (day: string) => {
+  const properties = await fetch(`${getBaseUrl()}/api/schedule/${day}`, {
+    cache: "no-store",
+    next: { revalidate: 60 },
+  });
   const json = await properties?.json();
   return json;
 };
 
-const ExoticSchedule: FC<{ page: string }> = async ({ page }) => {
-  const schedule = await getAllSchedule(page);
+const ExoticSchedule: FC<{ day: string }> = async ({ day }) => {
+  const schedule = await getAllSchedule(day);
   if (schedule?.message) {
     return (
       <div>
@@ -94,7 +68,7 @@ const ExoticSchedule: FC<{ page: string }> = async ({ page }) => {
     ) => (
       <Card
         key={i}
-        className="group border rounded-md overflow-hidden relative bg-transparent"
+        className="group border rounded-md overflow-hidden bg-transparent"
       >
         <AspectRatio ratio={3 / 4} className="bg-muted relative">
           <Link

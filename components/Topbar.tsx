@@ -41,6 +41,7 @@ const Topbar = () => {
       setTheme("system");
     }
   };
+
   return (
     <div
       className={cn(
@@ -62,7 +63,9 @@ const Topbar = () => {
                   <HamburgerMenuIcon />
                 </Button>
               </SheetTrigger>
-              <SheetLeft />
+              <SheetContent side={"left"} className="w-[300px] p-2">
+                <MainNav />
+              </SheetContent>
             </Sheet>
           )}
           <Button
@@ -122,11 +125,3 @@ const Topbar = () => {
 };
 
 export default Topbar;
-
-const SheetLeft = () => {
-  return (
-    <SheetContent side={"left"} className="w-[300px] p-2">
-      <MainNav />
-    </SheetContent>
-  );
-};

@@ -72,6 +72,7 @@ const MainNav = () => {
         <div>
           <Link
             href={"/analytics"}
+            target="_blank"
             className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
           >
             <BarChartIcon className="h-5 w-5 mr-4" />

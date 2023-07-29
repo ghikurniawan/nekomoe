@@ -2,15 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getBaseUrl } from "@/lib/getBaseUrl";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import {
-  Key,
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  PromiseLikeOfReactNode,
-  ReactPortal,
-  Suspense,
-} from "react";
+import { Key, Suspense } from "react";
 
 export default async function PropertiesPage() {
   return (
@@ -43,16 +35,7 @@ const Properties = async () => {
       {properties?.data.map(
         (item: {
           genreId: Key | null | undefined;
-          genreName:
-            | string
-            | number
-            | boolean
-            | ReactElement<any, string | JSXElementConstructor<any>>
-            | Iterable<ReactNode>
-            | ReactPortal
-            | PromiseLikeOfReactNode
-            | null
-            | undefined;
+          genreName: string | undefined;
         }) => (
           <li key={item.genreId}>
             <Link href={`/properties/genre/${item.genreId}`}>
