@@ -1,4 +1,3 @@
-import SectionComponent from "@/components/Section";
 import { Metadata } from "next";
 import React from "react";
 
@@ -11,5 +10,5 @@ export default function FinishedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <SectionComponent>{children}</SectionComponent>;
+  return <>{children}</>;
 }

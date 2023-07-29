@@ -31,7 +31,7 @@ const Properties = async () => {
     );
   }
   return (
-    <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 ">
+    <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 px-4">
       {properties?.data.map(
         (item: {
           genreId: Key | null | undefined;

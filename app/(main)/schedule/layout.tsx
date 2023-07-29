@@ -1,4 +1,3 @@
-import SectionComponent from "@/components/Section";
 import React from "react";
 import { Metadata } from "next";
 import ScheduleNav from "@/components/ScheduleNav";
@@ -17,7 +16,7 @@ export default function ScheduleLayout({
       <div className="p-4">
         <ScheduleNav />
       </div>
-      <SectionComponent>{children}</SectionComponent>
+      {children}
     </>
   );
 }

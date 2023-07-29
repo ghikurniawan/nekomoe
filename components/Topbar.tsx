@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import useScroll from "@/lib/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 import {
   CaretLeftIcon,
@@ -13,19 +12,19 @@ import {
   SunIcon,
 } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { FC, useEffect } from "react";
 import { useMachine } from "@xstate/react";
 import { ToggleModeMachine } from "@/lib/state-machine/ToggleModeMachine";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import MainNav from "./MainNav";
 import useWindowSize from "@/lib/hooks/use-window-size";
 
-const Topbar = () => {
+const Topbar: FC<{ scrolled: number }> = ({ scrolled }) => {
   const [current, send] = useMachine(ToggleModeMachine);
   const { setTheme, theme } = useTheme();
-  const scrolled = useScroll(20);
   const router = useRouter();
+  const pathname = usePathname();
   const { isMobile } = useWindowSize();
 
   useEffect(() => {
@@ -44,11 +43,12 @@ const Topbar = () => {
 
   return (
     <div
-      className={cn(
-        `${
-          scrolled ? "border-b bg-background/50 backdrop-blur-xl" : ""
-        } sticky top-0 transition-all p-4`
-      )}
+      className={`${
+        pathname === "/" && scrolled > 240
+          ? " bg-zinc-200/80 dark:bg-zinc-800/80 backdrop-blur-2xl "
+          : scrolled > 20 &&
+            " bg-zinc-200/80 dark:bg-zinc-800/80 backdrop-blur-2xl "
+      } sticky top-0 right-0 w-full transition-all p-4 z-50`}
     >
       <div className="flex justify-between">
         <div className="space-x-4 flex">

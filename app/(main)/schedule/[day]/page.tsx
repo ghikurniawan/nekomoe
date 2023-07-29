@@ -12,7 +12,7 @@ export default function ScheduledDaysPage({
   params: { day: string };
 }) {
   return (
-    <div className="pb-20 space-y-4 text-center">
+    <div className="pb-20 space-y-4 text-center px-4">
       <div className="w-full space-y-6 mb-10">
         <h1 className="font-bold text-2xl capitalize">{params?.day}</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -37,7 +37,6 @@ const GridFallback = () => {
 
 const getAllSchedule = async (day: string) => {
   const properties = await fetch(`${getBaseUrl()}/api/schedule/${day}`, {
-    cache: "no-store",
     next: { revalidate: 60 },
   });
   const json = await properties?.json();

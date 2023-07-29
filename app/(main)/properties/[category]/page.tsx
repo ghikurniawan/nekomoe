@@ -24,7 +24,7 @@ const GenrePage: FC<GenrePageProps> = async ({ params }) => {
     );
   }
   return (
-    <div className="pb-20 space-y-4 text-center">
+    <div className="pb-20 space-y-4 text-center px-4">
       <h1 className="capitalize">{category}</h1>
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {allCategory?.data.map(
