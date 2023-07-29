@@ -66,6 +66,13 @@ export default function RootLayout({
           src="https://iwwwan-umami.vercel.app/script.js"
           data-website-id="5af5b555-c821-4ec0-876c-1a5e0174df18"
         ></Script>
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3543991098802380"
+            crossOrigin="anonymous"
+          ></Script>
+        )}
       </body>
     </html>
   );
