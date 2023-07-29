@@ -3,10 +3,10 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Watch",
+  title: "Finished",
 };
 
-export default function LayoutWatch({
+export default function FinishedLayout({
   children,
 }: {
   children: React.ReactNode;

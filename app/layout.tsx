@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     default: "Nekomoe",
     template: "%s | Nekomoe",
   },
-  description: "Nonton anime subtitle Indonesia Gratis!",
+  description: "Nonton anime subtitle Indonesia Gratis tanpa Iklan!",
   openGraph: {
     title: "Nekomoe",
-    description: "Nonton anime subtitle Indonesia Gratis!",
+    description: "Nonton anime subtitle Indonesia Gratis tanpa Iklan!",
     url: process.env.BASE_URL,
     siteName: "Nekomoe",
     locale: "en-US",
@@ -64,19 +64,19 @@ export default function RootLayout({
         <Providers>
           {children}
           <footer className="h-[10vh] p-1">
-            <div className="flex justify-between w-full items-center px-4">
-              <div></div>
-              <Link href={"/"}>
-                <div className="flex flex-col items-center justify-center">
-                  <Logo className="w-10 h-10" />
+            <div className=" grid grid-cols-5 w-full px-4">
+              <div className=" col-span-1"></div>
+              <div className="col-span-3 flex flex-col items-center justify-center">
+                <Link href={"/"}>
+                  <Logo className="w-10 h-10 mx-auto" />
                   <div className="font-bold text-xl text-foreground/50">
                     Neko<span className="text-green-400">moe</span>
                   </div>
-                </div>
-              </Link>
-              <div>
+                </Link>
+              </div>
+              <div className=" col-span-1 flex items-center justify-end">
                 {UMAMI_TOKEN && (
-                  <Link href={"/analytics"}>
+                  <Link href={"/analytics"} target="_blank">
                     <Button variant={"outline"} className="rounded-full">
                       <Suspense fallback={"Loading..."}>
                         <ActiveViews />
@@ -105,8 +105,8 @@ const ActiveViews = async () => {
     {
       headers: {
         Authorization: `Bearer ${UMAMI_TOKEN}`,
+        cache: "no-store",
       },
-      next: { revalidate: 60 },
     }
   );
 
