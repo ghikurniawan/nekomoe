@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Adsense } from "@ctrl/react-adsense";
 
 import {
   ResizableHorizontalGrid,
@@ -46,6 +47,7 @@ function RootLayoutGrid({ children }: { children: React.ReactNode }) {
         <div className="bg-zinc-100 space-y-4 dark:bg-zinc-900 h-full rounded-md overflow-hidden p-4 ">
           <div className="max-h-80 rounded-md overflow-hidden h-full w-full mx-auto max-w-sm">
             <AspectRatio ratio={3 / 4} className="relative">
+              <Adsense client={""} slot={""} className="w-full h-full" />
               <div className="w-full h-full shadow-sm shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:bg-gradient-to-r before:from-transparent dark:before:via-zinc-800 before:via-zinc-300 before:to-transparent"></div>
               <div className="absolute text-xs top-2 right-2 border py-1 px-4 rounded-full bg-background/50">
                 Sponsors
