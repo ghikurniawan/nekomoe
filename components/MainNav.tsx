@@ -81,6 +81,7 @@ const MainNav = () => {
         <div>
           <Link
             href={"/analytics"}
+            prefetch={false}
             target="_blank"
             className="w-full flex justify-start items-center h-6 text-muted-foreground hover:text-foreground"
           >

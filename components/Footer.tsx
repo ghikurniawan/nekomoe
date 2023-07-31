@@ -21,7 +21,7 @@ const Footer = () => {
         </div>
         <div className=" col-span-1 flex items-center justify-end">
           {UMAMI_TOKEN && (
-            <Link href={"/analytics"} target="_blank">
+            <Link href={"/analytics"} target="_blank" prefetch={false}>
               <Button variant={"outline"} className="rounded-full">
                 <Suspense fallback={"Loading..."}>
                   <ActiveViews />
