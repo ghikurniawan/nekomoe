@@ -12,7 +12,7 @@ const nextConfig = {
       },
       {
         source: "/analytics",
-        destination: "https://iwwwan-umami.vercel.app/share/HylRhqOOfpd5PURO/nekomoe",
+        destination: "https://analytics.umami.is/share/hUOE7PeyHAnRzWwQ/nekomoe",
         permanent: true,
       },
     ]

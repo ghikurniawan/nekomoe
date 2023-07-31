@@ -63,8 +63,8 @@ export default function RootLayout({
         <Analytics />
         <Script
           async
-          src="https://iwwwan-umami.vercel.app/script.js"
-          data-website-id="5af5b555-c821-4ec0-876c-1a5e0174df18"
+          src="https://analytics.umami.is/script.js"
+          data-website-id="a2f6a39d-27c9-4c55-9654-ebb1b3e73353"
         ></Script>
         {process.env.NODE_ENV === "production" && (
           <Script
