@@ -66,13 +66,6 @@ export default function RootLayout({
           src="https://analytics.umami.is/script.js"
           data-website-id="a2f6a39d-27c9-4c55-9654-ebb1b3e73353"
         ></Script>
-        {process.env.NODE_ENV === "production" && (
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3543991098802380"
-            crossOrigin="anonymous"
-          ></Script>
-        )}
       </body>
     </html>
   );
