@@ -1,5 +1,5 @@
 const siteConfig = {
-  scraptUrl: "https://kuramanime.xyz"
+  scraptUrl: "https://kuramanime.pro"
 }
 
 export default siteConfig
