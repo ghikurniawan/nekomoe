@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import Providers from "./providers";
 import React from "react";
 import NextTopLoader from "nextjs-toploader";
-import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import { getBaseUrl } from "@/lib/getBaseUrl";
 import Footer from "@/components/Footer";
@@ -60,7 +59,6 @@ export default function RootLayout({
           {children}
           <Footer />
         </Providers>
-        <Analytics />
         <Script
           async
           src="https://analytics.umami.is/script.js"

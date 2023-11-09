@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["cdn.myanimelist.net", "drive.google.com", "s4.anilist.co"]
+    domains: ["cdn.myanimelist.net", "drive.google.com", "s4.anilist.co", "media.discordapp.net"]
   },
   redirects: async () => {
     return [
