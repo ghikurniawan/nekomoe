@@ -84,6 +84,7 @@ const OnGoing = async () => {
       </div>
     );
   }
+  
   return (
     <div className="w-full">
       <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
@@ -94,7 +95,7 @@ const OnGoing = async () => {
           >
             <AspectRatio ratio={3 / 4} className="bg-muted relative">
               <Link
-                href={`/details${d.animeId}`}
+                href={`/details${d.animeId.replace('https://kuramanime.vip', '')}`}
                 className="absolute inset-0 w-full group-focus:outline"
               >
                 <Image
@@ -159,7 +160,7 @@ const Finished = async () => {
           >
             <AspectRatio ratio={3 / 4} className="bg-muted relative">
               <Link
-                href={`/details${d.animeId}`}
+                href={`/details${d.animeId.replace('https://kuramanime.vip', '')}`}
                 className="absolute inset-0 w-full group-focus:outline"
               >
                 <Image

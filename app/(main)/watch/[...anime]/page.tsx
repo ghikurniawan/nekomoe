@@ -13,14 +13,14 @@ const getWatchAnime = async (
   stream_server: string = "archive",
   page: string | number = 1
 ) => {
-  const populars = await fetch(
+  const watch = await fetch(
     `${getBaseUrl()}/api/watch/${animeId}/${episode}?stream_server=${stream_server}&page=${page}`,
     {
       headers: { "content-type": "aplication/json" },
       next: { revalidate: 60 },
     }
   );
-  const json = populars.json();
+  const json = watch.json();
   return json;
 };
 
@@ -32,6 +32,7 @@ export default async function WatchPage({
   searchParams: { stream_server: string; page: string | number };
 }) {
   const animeId = `${params.anime[0]}/${params.anime[1]}/${params.anime[2]}`;
+  console.log("anime id" , animeId)
   const { stream_server, page } = searchParams;
   let episode = `${params.anime[3]}/${params.anime[4]}` as string | undefined;
   if (episode == "undefined/undefined") {

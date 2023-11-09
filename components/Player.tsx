@@ -42,10 +42,14 @@ const Player: FC<{
   }, []);
 
   useEffect(() => {
-    const defaultUrl = source[defaultSource].episode;
+    const defaultUrl = source[defaultSource]?.episode;
     setUrl(defaultUrl);
     setMuted(false);
   }, [defaultSource, source]);
+  
+  useEffect(() => {
+    console.log(source)
+  }, [source]);
 
   function handleError(
     error: any,

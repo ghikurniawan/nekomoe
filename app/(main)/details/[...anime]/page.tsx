@@ -57,7 +57,7 @@ export default async function AnimePage({
             >
               <AspectRatio ratio={3 / 4} className="bg-muted relative">
                 <Link
-                  href={`/watch${d.episodeId}`}
+                  href={`/watch${d.episodeId.replace('https://kuramanime.vip', '')}`}
                   className="absolute inset-0 w-full group-focus:outline"
                 >
                   <Image
